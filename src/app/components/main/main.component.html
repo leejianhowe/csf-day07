@@ -1,0 +1,4 @@
+<div class="row" *ngFor="let item of list" style="border: dotted black 1px">
+    <h3>{{ item.title }}</h3>
+    <a [routerLink]="['/task', item.titleId]">{{ item.titleId }}</a>
+</div>

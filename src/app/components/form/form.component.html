@@ -1,0 +1,52 @@
+
+<form [formGroup]="form">
+  <div class="form-group">
+    <label for="title">Title:</label>
+    <input type="text" formControlName="title" />
+  </div>
+  <div>
+    <button class="btn btn-success" (click)="addTask()" type="button">Add Task</button>
+    <button type="button" (click)="show()" class="btn btn-light">Show</button>
+  </div>
+
+  <div *ngIf="formTaskArray.controls.length > 0; else nil">
+    <div>
+      <table>
+        <tr>
+          <th>Description</th>
+          <th>Priority</th>
+          <th>Due</th>
+          <th>Remove</th>
+        </tr>
+        <tbody formArrayName="task">
+          <tr
+            [formGroup]="item"
+            *ngFor="let item of formTaskArray.controls; let index = index"
+          >
+            <td>
+              <input type="text" formControlName="description" />
+            </td>
+            <td>
+              <select formControlName="priority">
+                <option value="0">Low</option>
+                <option value="1">Med</option>
+                <option value="2">High</option>
+              </select>
+            </td>
+            <td>
+              <input type="text" formControlName="due" />
+            </td>
+            <td>
+              <button (click)="removeTask(index)" type="button">X</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <ng-template #nil>
+    <div class="row">
+      <div class="col-12">NO TASK</div>
+    </div>
+  </ng-template>
+</form>

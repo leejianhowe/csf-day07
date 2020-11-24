@@ -1,0 +1,18 @@
+<h3>Task: {{titleId}}</h3>
+<app-form #form></app-form>
+<button [routerLink]="['/']" type="button">Back</button>
+<button (click)="save()"type="button">Save</button>
+<button (click)="delete()"type="button">Delete</button>
+
+
+<!-- <app-form-details></app-form-details> -->
+<!-- <app-form></app-form> -->
+<!-- <app-form-details [task]="form"></app-form-details> -->
+<!-- retrieve todo from database
+    modify todo component to accpet a todo object
+    eg <app-todocomponent [todo]="myTodo">
+        inside the set todo() take the values of the form and
+        A) create the form
+        B) populate the form with values from the todo object // look at day6 example
+    add 3 buttons(add, update, delete) to the list html (not inside component)
+    navigate back to Main-->
