@@ -31,7 +31,7 @@ export class ListComponent implements OnInit {
     const formData: FormModel = this.formRef.todo as FormModel
     formData.titleId = this.titleId
     console.log(formData)
-    await this.formDataBase.saveTask(formData);
+    await this.formDataBase.addForm(formData);
     this.router.navigate(['/']);
   }
   async delete() {
