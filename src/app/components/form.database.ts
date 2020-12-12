@@ -4,11 +4,13 @@ import { Dexie } from 'dexie';
 //import FormModel
 import { FormModel, Summary } from './form.model';
 
+import { HttpClient} from '@angular/common/http'
 @Injectable()
 export class FormDataBase extends Dexie {
   private form: Dexie.Table<FormModel, string>;
+  URL:string = 'http://localhost:3000'
+  constructor(private http: HttpClient) {
 
-  constructor() {
     // database name: formDB
     super('formDB');
     // setup schema for v1
@@ -21,7 +23,8 @@ export class FormDataBase extends Dexie {
   }
 
   async addForm(formData: FormModel): Promise<any> {
-    return await this.form.put(formData);
+    console.log(formData)
+    // return this.http.post('http://localhost:3000/',formData)
   }
 
   async getSummary(): Promise<Summary[]> {
@@ -36,6 +39,12 @@ export class FormDataBase extends Dexie {
 
   async deleteTask(titleId: string): Promise<any> {
     return await this.form.delete(titleId);
+  }
+
+  async uploadImage(formData){
+    const result = await this.http.post(`${this.URL}/upload`,formData).toPromise()
+    console.log(result)
+    return result
   }
 
   // async saveTask(formData: FormModel): Promise<any> {

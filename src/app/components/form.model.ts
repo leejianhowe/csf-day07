@@ -11,9 +11,9 @@ export interface Task {
 }
 
 export interface FormModel {
-  titleId: string;
   title: string;
   task: Task[];
+  titleId?: string;
 }
 
 export interface Summary{

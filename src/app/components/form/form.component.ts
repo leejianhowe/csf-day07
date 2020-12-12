@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {
   Form,
   FormArray,
@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { FormDataBase } from '../form.database';
 import { FormModel } from '../form.model';
 @Component({
   selector: 'app-form',
@@ -14,10 +15,14 @@ import { FormModel } from '../form.model';
 })
 export class FormComponent implements OnInit {
   form: FormGroup;
+  formImage: FormGroup;
   formTaskArray: FormArray;
   formTaskGroup: FormGroup;
+  imageUrl:string=''
 
-  constructor(private fb: FormBuilder) {}
+  @ViewChild('image') image: ElementRef<HTMLInputElement>
+
+  constructor(private fb: FormBuilder, private formDatabase: FormDataBase) {}
 
   ngOnInit(): void {
     this.form = this.createForm();
@@ -28,7 +33,8 @@ export class FormComponent implements OnInit {
 
   private createForm(title?: string): FormGroup {
     return this.fb.group({
-      title: this.fb.control(title, [Validators.required]),
+      image:this.fb.control(''),
+      taskName:this.fb.control('',[Validators.required]),
       task: this.fb.array([]),
     });
   }
